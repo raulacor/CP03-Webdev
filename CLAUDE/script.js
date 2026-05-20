@@ -137,8 +137,8 @@ function initMatrixRain() {
             drops[i]++; /* Move the drop down by one row each frame */
         }
 
-        /* Schedule the next frame */
-        matrixRainAnimationId = requestAnimationFrame(drawRain);
+        /* Schedule the next frame — delay slows the rain speed */
+        matrixRainAnimationId = setTimeout(function() { requestAnimationFrame(drawRain); }, 50);
     }
 
     drawRain(); /* Kick off the animation loop */
