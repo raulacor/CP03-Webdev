@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrix Project Ideas</title>
+
+    <!-- External CSS file -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Matrix rain background effect -->
+    <div class="matrix-background"></div>
+
+    <!-- Main application container -->
+    <div class="container">
+
+        <!-- ========================= -->
+        <!-- LOGIN SCREEN (INITIAL) -->
+        <!-- ========================= -->
+        <section id="loginSection" class="card">
+
+            <h1 class="title">PROJECT IDEAS TERMINAL</h1>
+
+            <p class="subtitle">
+                ACCESS RESTRICTED • ENTER CREDENTIALS
+            </p>
+
+            <!-- Login form -->
+            <div class="form-group">
+                <label>User</label>
+                <input type="text" id="username" placeholder="Enter user..." />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password..." />
+            </div>
+
+            <!-- Login button -->
+            <button id="loginButton" class="main-button">
+                LOGIN
+            </button>
+
+            <!-- Login error message -->
+            <p id="loginMessage" class="message"></p>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- CRUD SCREEN (HIDDEN) -->
+        <!-- ========================= -->
+        <section id="crudSection" class="card hidden">
+
+            <h2 class="crud-title">PROJECT IDEAS DATABASE</h2>
+
+            <!-- Input for new project -->
+            <div class="crud-controls">
+
+                <input
+                    type="text"
+                    id="projectInput"
+                    placeholder="Type a new project idea..."
+                />
+
+                <!-- Add to end -->
+                <button id="addEndButton" class="action-button">
+                    ADD TO END
+                </button>
+
+                <!-- Add to beginning -->
+                <button id="addBeginningButton" class="action-button">
+                    ADD TO BEGINNING
+                </button>
+
+            </div>
+
+            <!-- CRUD validation messages -->
+            <p id="crudMessage" class="message"></p>
+
+            <!-- Dynamic project list -->
+            <ul id="projectListContainer" class="project-list">
+
+                <!-- JS will render items here -->
+
+            </ul>
+
+        </section>
+
+    </div>
+
+    <!-- External JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+</html>
