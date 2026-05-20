@@ -1,0 +1,168 @@
+/* --- GLOBAL STYLES & RESET --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #050505; /* Deep black */
+    color: #00ff41; /* Classic Matrix neon green */
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* CRT Scanline effect to create an immersive terminal feel */
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none; /* Allows clicking through the overlay */
+    z-index: 999;
+}
+
+/* --- TERMINAL CONTAINERS --- */
+.terminal-box {
+    background-color: rgba(0, 20, 0, 0.8);
+    border: 1px solid #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    padding: 30px;
+    width: 600px;
+    max-width: 90%;
+    z-index: 10;
+}
+
+.terminal-box h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #00ff41;
+    padding-bottom: 5px;
+}
+
+.terminal-box p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* --- INPUTS & BUTTONS --- */
+.input-group, .controls-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    background-color: #000;
+    border: 1px solid #008f11;
+    color: #00ff41;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input:focus {
+    border-color: #00ff41;
+    box-shadow: 0 0 8px #00ff41;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-matrix {
+    background-color: transparent;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.btn-matrix:hover {
+    background-color: #00ff41;
+    color: #000;
+    box-shadow: 0 0 15px #00ff41;
+}
+
+/* --- LIST STYLES --- */
+.list-container {
+    margin-top: 30px;
+    border-top: 1px dashed #008f11;
+    padding-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    background: rgba(0, 50, 0, 0.3);
+    border-left: 3px solid #00ff41;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-text {
+    flex-grow: 1;
+    word-break: break-all;
+    margin-right: 15px;
+}
+
+.item-actions button {
+    background: transparent;
+    border: 1px solid #008f11;
+    color: #008f11;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.item-actions button:hover {
+    border-color: #00ff41;
+    color: #00ff41;
+}
+
+.item-actions button.btn-remove:hover {
+    border-color: #ff003c;
+    color: #ff003c;
+    box-shadow: 0 0 8px #ff003c;
+}
+
+/* --- UTILITIES --- */
+.hidden {
+    display: none !important;
+}
+
+.glow {
+    text-shadow: 0 0 8px #00ff41;
+}
+
+.error-msg {
+    color: #ff003c; /* Neon Red */
+    text-shadow: 0 0 5px #ff003c;
+    min-height: 20px; /* Prevents layout shift */
+    margin-bottom: 15px;
+    font-weight: bold;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Terminal | Project Ideas</title>
+    <!-- Linking the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- OVERLAY: CRT screen effect -->
+    <div class="scanlines"></div>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-container" class="terminal-box">
+        <h1 class="glow">SYSTEM_LOGIN</h1>
+        <p>Please enter your credentials to access the mainframe.</p>
+        
+        <div class="input-group">
+            <label for="username">> USERNAME:</label>
+            <input type="text" id="username" autocomplete="off" placeholder="Enter username...">
+        </div>
+        
+        <div class="input-group">
+            <label for="password">> PASSWORD:</label>
+            <input type="password" id="password" placeholder="Enter password...">
+        </div>
+
+        <!-- Div specifically for showing login errors -->
+        <div id="login-error" class="error-msg"></div>
+
+        <button id="btn-login" class="btn-matrix">[ AUTHENTICATE ]</button>
+    </div>
+
+    <!-- MAIN APP SCREEN (Starts hidden) -->
+    <div id="app-container" class="terminal-box hidden">
+        <h1 class="glow">PROJECT_MAINFRAME</h1>
+        <p>Welcome, Operator. Manage your system tasks below.</p>
+
+        <!-- Div specifically for CRUD errors -->
+        <div id="app-error" class="error-msg"></div>
+
+        <div class="controls-group">
+            <label for="new-project">> NEW_PROJECT_NAME:</label>
+            <input type="text" id="new-project" autocomplete="off" placeholder="Type data here...">
+            <div class="btn-group">
+                <button id="btn-add-start" class="btn-matrix">[ PUSH_TO_START ]</button>
+                <button id="btn-add-end" class="btn-matrix">[ PUSH_TO_END ]</button>
+            </div>
+        </div>
+
+        <div class="list-container">
+            <h2>> DIRECTORY_LISTING:</h2>
+            <!-- The list will be rendered here dynamically by JS -->
+            <ul id="project-list-ui"></ul>
+        </div>
+    </div>
+
+    <!-- Linking the external JS file -->
+    <script src="script.js"></script>
+</body>
+</html>
