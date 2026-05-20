@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT::MATRIX — Ideas Repository</title>
+
+    <!-- Google Fonts: VT323 for display titles, Share Tech Mono for terminal body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Application stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         LAYER 1: Matrix rain canvas (fixed background)
+         Rendered by initMatrixRain() in script.js
+         ============================================================ -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- ============================================================
+         LAYER 2: CRT Scanlines overlay
+         Pure CSS effect — pointer-events: none so it doesn't block clicks
+         ============================================================ -->
+    <div class="scanlines"></div>
+
+    <!-- ============================================================
+         LAYER 3: LOGIN SECTION
+         Shown on initial load. Hidden after successful authentication.
+         ============================================================ -->
+    <section id="loginSection">
+        <div class="terminal-panel login-panel">
+
+            <!-- Simulated OS boot sequence header -->
+            <div class="boot-header">
+                <p class="boot-line">&gt; SYSTEM_OS v2.0.25 — SECURE TERMINAL INITIALIZED</p>
+                <p class="boot-line">&gt; LOADING ENCRYPTION PROTOCOLS... <span class="blink-text">[OK]</span></p>
+                <p class="boot-line blink-text">&gt; AWAITING USER AUTHENTICATION_</p>
+            </div>
+
+            <!-- Main title with glitch effect (data-text mirrors inner text for CSS pseudo-elements) -->
+            <h1 class="panel-title glitch-text" data-text="PROJECT::MATRIX">PROJECT::MATRIX</h1>
+            <p class="panel-subtitle">// Secure Ideas Repository — Restricted Access //</p>
+
+            <!-- Login Form — novalidate disables browser's default HTML5 validation UI -->
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label class="terminal-label" for="usernameInput">[ USER_ID ]</label>
+                    <input
+                        type="text"
+                        id="usernameInput"
+                        class="terminal-input"
+                        placeholder="enter_username..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="terminal-label" for="passwordInput">[ PASSKEY ]</label>
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        class="terminal-input"
+                        placeholder="enter_passkey..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <!-- Error message container — hidden by default, shown by JS on validation failure -->
+                <div id="loginError" class="error-message" style="display: none;"></div>
+
+                <button type="submit" class="terminal-btn btn-primary">
+                    <span class="btn-prefix">&gt;&gt;</span> AUTHENTICATE
+                </button>
+            </form>
+
+            <!-- Footer attribution -->
+            <div class="panel-footer">
+                <span>FIAP &mdash; ACADEMIC SYSTEM &mdash; 2025 &mdash; ALL ACCESS MONITORED</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================
+         LAYER 3: APP / CRUD SECTION
+         Hidden on initial load. Revealed after successful login.
+         ============================================================ -->
+    <section id="appSection" style="display: none;">
+        <div class="terminal-panel app-panel">
+
+            <!-- App Header with title and logout control -->
+            <div class="app-header">
+                <div class="header-left">
+                    <h1 class="panel-title">PROJECT::MATRIX</h1>
+                    <p class="panel-subtitle">// Ideas Repository — Authorized Session Active //</p>
+                </div>
+                <div class="header-right">
+                    <span class="status-badge">&#9679; ONLINE</span>
+                    <button id="logoutBtn" class="terminal-btn btn-danger btn-small">
+                        [ LOGOUT ]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status bar — shows contextual messages and live item count -->
+            <div class="status-bar">
+                <span id="statusText">SYSTEM READY — AWAITING INPUT</span>
+                <span id="itemCount">ITEMS: 0</span>
+            </div>
+
+            <!-- ── ADD NEW PROJECT AREA ── -->
+            <div class="add-area">
+                <label class="terminal-label">[ INJECT NEW PROJECT ]</label>
+                <div class="input-row">
+                    <!-- Shared input field for both Add buttons -->
+                    <input
+                        type="text"
+                        id="newItemInput"
+                        class="terminal-input"
+                        placeholder="enter_project_name..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <!-- Adds to END of array via Array.push() -->
+                    <button id="addEndBtn" class="terminal-btn btn-primary btn-small">
+                        <span class="btn-prefix">&gt;</span> ADD_END
+                    </button>
+                    <!-- Adds to BEGINNING of array via Array.unshift() -->
+                    <button id="addBeginBtn" class="terminal-btn btn-accent btn-small">
+                        <span class="btn-prefix">^</span> ADD_TOP
+                    </button>
+                </div>
+                <!-- Error container for CRUD operations -->
+                <div id="crudError" class="error-message" style="display: none;"></div>
+            </div>
+
+            <!-- Visual divider between input area and the list -->
+            <div class="terminal-divider">
+                <span>&#9472;&#9472; LOADED PROJECTS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;</span>
+            </div>
+
+            <!-- ── PROJECT LIST (Read) ──
+                 The <ul> is populated dynamically by renderList() in script.js.
+                 Each <li> will contain the item text, an EDIT button, and a DEL button. -->
+            <div class="project-list-container">
+                <ul id="projectList" class="project-list">
+                    <!-- Items injected here by renderList() -->
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Application logic — loaded at end of body so all DOM elements exist -->
+    <script src="script.js"></script>
+</body>
+</html>
